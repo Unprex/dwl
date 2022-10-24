@@ -37,6 +37,18 @@ static const MonitorRule monrules[] = {
 	{ NULL,       0.55, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL },
 };
 
+/* auto rotation */
+static bool rotation_enabled = true;
+static const int rotation_delay = 500;
+static const float rotation_flat = 0.9;
+static const float rotation_thresh = 0.6;
+
+/* accelerometer used */
+static const char *accel_path = "/dev/input/accel";
+static const char *accel_x = "in_accel_x_raw";
+static const char *accel_y = "in_accel_y_raw";
+static const char *accel_z = "in_accel_z_raw";
+
 /* keyboard */
 static const struct xkb_rule_names xkb_rules = {
 	/* can specify fields: rules, model, layout, variant, options */
@@ -127,6 +139,11 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_period,     focusmon,       {.i = WLR_DIRECTION_RIGHT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_less,       tagmon,         {.i = WLR_DIRECTION_LEFT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_greater,    tagmon,         {.i = WLR_DIRECTION_RIGHT} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Up,         setrotation,    {.i = WL_OUTPUT_TRANSFORM_NORMAL} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Left,       setrotation,    {.i = WL_OUTPUT_TRANSFORM_90} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Down,       setrotation,    {.i = WL_OUTPUT_TRANSFORM_180} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Right,      setrotation,    {.i = WL_OUTPUT_TRANSFORM_270} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_R,          togglerotation, {0} },
 	TAGKEYS(          XKB_KEY_1, XKB_KEY_exclam,                     0),
 	TAGKEYS(          XKB_KEY_2, XKB_KEY_at,                         1),
 	TAGKEYS(          XKB_KEY_3, XKB_KEY_numbersign,                 2),
