@@ -2694,7 +2694,6 @@ setrotation(const Arg *arg)
 {
 	wlr_output_set_transform(selmon->wlr_output, arg->i);
 	wlr_output_commit(selmon->wlr_output);
-	printf("Set rotation %d\n", arg->i);
 }
 
 void
