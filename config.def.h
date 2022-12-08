@@ -91,6 +91,11 @@ LIBINPUT_CONFIG_TAP_MAP_LMR -- 1/2/3 finger tap maps to left/middle/right
 */
 static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TAP_MAP_LRM;
 
+/* Touch screen */
+static const bool touch_enabled = true;
+static const int32_t touch_finger = 0; /* multi-touch finger id */
+static const uint32_t touch_button = BTN_LEFT;
+
 /* If you want to use the windows key for MODKEY, use WLR_MODIFIER_LOGO */
 #define MODKEY WLR_MODIFIER_ALT
 
